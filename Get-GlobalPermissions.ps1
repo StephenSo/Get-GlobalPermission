@@ -77,7 +77,7 @@ function ConvertFrom-Mob3HtmlTable
     foreach ($field in $search){
       if(($parsedResults -like "$($field.Search)*")) {
         $result = $parsedResults.replace(($field.Search),"")
-        $MyObj | Add-Member -MemberType NoteProperty -Name ($field.Field) -Value $result
+        $MyObj | Add-Member -MemberType NoteProperty -Name ($field.Field) -Value ($result -replace "`t|`n|`r","")
       }
       if (($MyObj | Get-Member -MemberType NoteProperty).Name -contains ($search[$search.Count-1].Field)) {
         $return += $MyObj
